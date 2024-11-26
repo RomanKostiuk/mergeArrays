@@ -4,17 +4,16 @@ const readline = require('readline');
 
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
 
-const mergeArrays = (list1, list2, order) => {
-  const compare = (x, y) => (order === 'asc' ? x - y : y - x);
-  return [...list1, ...list2].sort(compare);
+const mergeAndSortAscending = (list1, list2) => {
+  return [...list1, ...list2].sort((x, y) => x - y);
 };
 
-rl.question('Введіть перший список: ', (input1) => {
-  rl.question('Введіть другий список: ', (input2) => {
-    rl.question('Сортування (asc/desc): ', (order) => {
-      if (!['asc', 'desc'].includes(order)) return console.log('Невірний напрям!') || rl.close();
-      console.log('Результат:', mergeArrays(input1.split(',').map(Number), input2.split(',').map(Number), order));
-      rl.close();
-    });
+rl.question('5,2,9: ', (input1) => {
+  rl.question('3,8,1: ', (input2) => {
+    console.log(
+      'Результат ([1, 2, 3, 5, 8, 9]):',
+      mergeAndSortAscending(input1.split(',').map(Number), input2.split(',').map(Number))
+    );
+    rl.close();
   });
 });
